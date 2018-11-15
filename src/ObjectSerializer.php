@@ -251,6 +251,19 @@ class ObjectSerializer
             } else {
                 return null;
             }
+        elseif ($class === 'Number') {
+            if (is_numeric($data)) {
+                if (is_integer($data)) {
+                    settype($data, 'integer');
+                } elseif (is_int($data)) {
+                    settype($data, 'int');
+                } elseif (is_float($data)) {
+                    settype($data, 'float');
+                } elseif (is_double($data)) {
+                    settype($data, 'double');
+                }
+            }
+            return $data;
         } elseif (in_array($class, ['DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
             settype($data, $class);
             return $data;
